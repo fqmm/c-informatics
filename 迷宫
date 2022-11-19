@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+int n, m; //行，列
+int t; //障碍总数
+int map[6][6];
+int zx, zy; //障碍物的坐标
+int sx, sy; //起始坐标
+int tx, ty; //终点坐标
+int step;
+int _next[4][2] = { { -1, 0 },{ 0, 1 },{ 0, -1 },{ 1, 0 } };
+//判断这个坐标是否在 map 里
+bool inmap(int x, int y)
+{
+return (x >= 1 && x <= n && y >= 1 && y <= n);
+}
+void dfs(int x, int y)
+{
+if (x == tx && y == ty)
+{
+step++;
+return;
+}
+for (int i = 0; i < 4; i++)
+{
+int nx = x + _next[i][0];
+int ny = y + _next[i][1];
+//cout<<nx<<" "<<ny<<endl; 
+if (inmap(nx, ny) == 1 && map[nx][ny] != 1 && map[nx][ny] != 2)
+{
+map[nx][ny] = 2;
+dfs(nx, ny);
+map[nx][ny] = 0; // 恢复现场
+}
+}
+}
+int main()
+{
+cin >> n >> m >> t;
+cin >> sx >> sy;//输入起始坐标
+cin >> tx >> ty;//输入终点坐标
+for (int i = 0; i < t; i++)
+{
+cin >> zx >> zy;
+map[zx][zy] = 1;//障碍物设置成一
+}
+map[sx][sy] = 2;
+dfs(sx, sy);
+cout << step << endl;
+}
