@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+int h,m,n;
+int main()
+{
+	int wat[33][51][51]={0};
+	cin>>h>>m>>n;
+	for(int i=1;i<=h;i++){
+		for(int j=1;j<=m;j++){
+			for(int k=1;k<=n;k++){
+				cin>>wat[i][j][k];	
+			}
+	    }
+	}
+	
+	
+	int anss=0;
+	int ans=-10000;
+	//////////////////////
+	for(int i=1;i<=h;i++)
+	{
+		for(int j=1;j<=m;j++)
+		{
+			for(int k=1;k<=n;k++)
+			{
+				anss+=wat[i][j][k];
+			
+			}
+		}
+		ans=max(ans,anss);
+		anss=0;
+	}
+	
+    /////////////////////	
+		anss=0;
+		for(int i=1;i<=m;i++)
+	{
+		for(int j=1;j<=h;j++)
+		{
+			for(int k=1;k<=n;k++)
+			{
+				anss+=wat[j][i][k];
+			
+			}
+		}
+		ans=max(ans,anss);
+		anss=0;
+	}
+	anss=0;
+	///////////////////
+		for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=h;j++)
+		{
+			for(int k=1;k<=m;k++)
+			{
+					anss+=wat[j][k][i];
+					
+			}
+		}
+		ans=max(ans,anss);
+		anss=0;
+	}
+	cout<<ans;
+	return 0;
+}
