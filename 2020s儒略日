@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool pd(int x);
+int INF = 0x3f3f3f3f;
+int a[20] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+long long g(long long x) {
+    int s=-4712;
+    if(x<s) return 0;
+    long long d=(x-s+1)*365;
+    if (x<1582) {
+        d+=(x-s)/4+1;
+    } 
+	else {
+        d-=10;
+        d+=(1581 - s) / 4 + 1;
+        d+=(x-1580)/4-(x-1500)/100+(x-1200)/400;
+    }
+    return d;
+}
+
+int main() {
+    
+    int Q;
+    scanf("%d", &Q);
+    while (Q--) {
+        long long n;
+        scanf("%lld", &n);
+        n++;
+        int l=-4712, r=1e9 + 5;
+        while (l<r) 
+		{
+            int mid =l+r>>1;
+            if (g(mid)>=n) {
+                r = mid;
+            } 
+			else {
+                l=mid+1;
+            }
+        }
+        n=n-g(l-1);
+        a[2]=28+pd(l);
+        a[10]=l==1582?21:31;
+        int m;
+        for (int i=1;i<=12;i++) {
+            if (n>a[i]) {
+                n-=a[i];
+            } else {
+                m=i;
+                break;
+            }
+        }
+        if (l==1582&&m==10) {
+            if (n>=5) n+=10;
+            printf("%lld %d %d\n", n, m, l);
+        } else {
+            if (l>0)
+                printf("%lld %d %d\n", n, m, l);
+            else
+                printf("%lld %d %d BC\n", n, m,-l+1);
+        }
+    }
+    return 0;
+}
+bool pd(int x) {
+	bool f;
+    if (x>1582) {
+    	f=x%4==0&&x%100!=0||x% 400==0;
+        return f;
+    } else {
+    	f=x%4==0;
+        return f;
+    }
+}
