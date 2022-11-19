@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int e = 10000000;
+
+int n, m, p1, p2;
+long a[e], s1, s2, b;
+
+int main() {
+    cin >> n;
+    for (int i = 1; i <= n; i++) cin >> a[i];
+    cin >> m >> p1 >> s1 >> s2;
+    a[p1] += s1;
+    for (int i = 1; i <= n; i++)
+    {
+        b += (i - m) * a[i];
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        if (abs(b + (i - m) * s2) < abs(b + (p2 - m) * s2)) p2 = i;
+    }
+    cout << p2;
+    return 0;
+}
