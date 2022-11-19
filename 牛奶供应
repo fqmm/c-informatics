@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n,m,l=0,s;
+//int p[10005],c[10005];
+struct{
+
+	int p;
+	int c;
+	int sh;
+}a[10005];
+int main()
+{
+scanf("%d%d",&n,&m);
+for(int i=1;i<=n;i++)
+{
+	cin>>p>>c;
+	a[i].p+=s;
+	if(c>=p)
+	{
+	l+=p;
+    }
+else
+{
+	l+=c;
+	a[i].sh=p-c;
+	for(int j=i-1;i>=j-m;j--)
+	{
+		s+=a[i].sh;
+		a[i].sh=0;
+	}
+}
+
+}
+cout<<l;
+return 0;
+}
