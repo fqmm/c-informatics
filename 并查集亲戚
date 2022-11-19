@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+int find(int x);
+void merge(int i,int j);
+int N,M,a,b,n,d,d1;
+int c,c1;
+int par[20005];
+struct v{
+	int d,d1;
+}s[1000005];
+int main()
+{
+	scanf("%d%d",&N,&M);
+	for(int i=0;i<N;i++)
+	{
+		par[i]=i;
+	}
+	for(int i=0;i<M;i++)
+	{
+		cin>>a>>b;
+		merge(a,b);
+	}
+	cin>>n;
+	for(int i=1;i<=n;i++)
+	{
+		cin>>s[i].d>>s[i].d1;
+	    
+	    
+	}
+	for(int i=1;i<=n;i++)
+	{
+		if(find(s[i].d)==find(s[i].d1)){
+	    	cout<<"Yes"<<"\n";
+	    	
+		}
+		else
+		{
+			cout<<"No"<<"\n";
+		}
+	}
+	return 0;
+}
+int find(int x){
+    if(par[x]==x)
+        return x;
+
+        par[x]=find(par[x]);   
+        return par[x];
+}
+void merge(int i,int j){
+    par[find(j)] = find(i);
+}
