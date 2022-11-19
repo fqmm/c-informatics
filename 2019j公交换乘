@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n;
+
+int main()
+{
+    long  a[100000],pri[1005],t[100000],p=0;
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++)
+	{
+		cin>>a[i]>>pri[i]>>t[i];
+	}
+	for(int l=1;l<=n;l++)
+	{
+		if(a[l]==1)
+		{
+			if(l==1)
+			{
+				p=p+pri[l];
+			}
+			else
+			{
+			for(int b=1;b<l;b++)
+			{
+				if((a[b]==0)&&(pri[b]!=0))
+				{
+					if((pri[b]>=pri[l])&&(t[l]-t[b]<=45))
+					{
+						pri[b]=0;
+						break;
+						
+					}
+					
+				}
+				if(b==l-1)
+				{
+				
+					p=p+pri[l];
+				}
+			}	
+			}
+		}
+		else
+		{
+			p=p+pri[l];
+		}
+	}
+	cout<<p;
+	return 0;
+}
